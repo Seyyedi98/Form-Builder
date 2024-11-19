@@ -1,6 +1,11 @@
 import { CredentialsLoginForm } from "@/app/_components/auth/credentials-login-form";
 import { MobileLoginForm } from "@/app/_components/auth/mobile-login-form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/app/_components/ui/shadcn/tabs";
 
 const Login = () => {
   return (

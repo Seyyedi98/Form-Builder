@@ -1,4 +1,8 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from "@/app/_components/ui/shadcn/card";
 
 export const UserInfo = ({ user, label }) => {
   return (

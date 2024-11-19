@@ -3,8 +3,12 @@
 import { settings } from "@/actions/user/settings";
 import { FormError } from "@/app/_components/ui/form/form-error";
 import { FormSuccess } from "@/app/_components/ui/form/form-success";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/app/_components/ui/shadcn/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from "@/app/_components/ui/shadcn/card";
 import {
   Form,
   FormControl,
@@ -13,15 +17,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/app/_components/ui/shadcn/form";
+import { Input } from "@/app/_components/ui/shadcn/input";
 import {
   Select,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+} from "@/app/_components/ui/shadcn/select";
+import { Switch } from "@/app/_components/ui/shadcn/switch";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { SettingsSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";

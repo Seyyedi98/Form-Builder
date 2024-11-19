@@ -1,7 +1,7 @@
 "use client";
 
 import { reset } from "@/actions/auth/reset";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/_components/ui/shadcn/button";
 import {
   Form,
   FormControl,
@@ -9,13 +9,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/app/_components/ui/shadcn/form";
+import { Input } from "@/app/_components/ui/shadcn/input";
 import { ResetSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { CardWrapper } from "../ui/card-wrapper";
+import { CardWrapper } from "../ui/cards/card-wrapper";
 import { FormError } from "../ui/form/form-error";
 import { FormSuccess } from "../ui/form/form-success";
 

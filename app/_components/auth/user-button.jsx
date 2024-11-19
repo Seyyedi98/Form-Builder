@@ -1,12 +1,16 @@
 "use client";
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/app/_components/ui/shadcn/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/app/_components/ui/shadcn/dropdown-menu";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { User } from "lucide-react";
 import { LogoutButton } from "./logout-button";

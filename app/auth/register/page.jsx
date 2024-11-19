@@ -1,6 +1,11 @@
 import { CredentialsRegisterForm } from "@/app/_components/auth/credentials-register-form";
 import { MobileRegisterForm } from "@/app/_components/auth/mobile-register-form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/app/_components/ui/shadcn/tabs";
 
 const page = () => {
   return (

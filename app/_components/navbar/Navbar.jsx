@@ -1,42 +1,18 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/_components/ui/shadcn/button";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 import UserButton from "../auth/user-button";
+import ThemeSwitcher from "../ui/global/ThemeSwitcher";
+import Logo from "../ui/global/Logo";
 
 const Navbar = () => {
-  const pathname = usePathname();
   return (
-    <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm">
-      <div className="flex gap-x-2">
-        <Button
-          asChild
-          variant={pathname === "/dashboard/settings" ? "default" : "outline"}
-        >
-          <Link href="/dashboard/settings">Settings</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/dashboard/server" ? "default" : "outline"}
-        >
-          <Link href="/dashboard/server">Server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/dashboard/client" ? "default" : "outline"}
-        >
-          <Link href="/dashboard/client">Client</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === "/dashboard/admin" ? "default" : "outline"}
-        >
-          <Link href="/dashboard/admin">Admin</Link>
-        </Button>
+    <nav className="flex justify-between border-b border-border h=[60px] px-4 py-2 items-center">
+      <Logo />
+      <div className="flex gap-4 items-center">
+        <ThemeSwitcher />
+        <UserButton />
       </div>
-      <UserButton />
     </nav>
   );
 };
