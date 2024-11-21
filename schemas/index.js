@@ -69,3 +69,11 @@ export const SettingsSchema = z
     },
     { message: "Password is requider!", path: ["password"] }
   );
+
+///////////////////////////////////////////////////////////
+///////////////////////   FORM    /////////////////////////
+///////////////////////////////////////////////////////////
+export const FormSchema = z.object({
+  name: z.string().min(3, { message: "نام فرم باید بیش از ۳ کاراکتر باشد" }),
+  description: z.string().optional(),
+});

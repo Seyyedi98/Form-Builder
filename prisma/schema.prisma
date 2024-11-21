@@ -115,6 +115,8 @@ model Form {
 
   shareUrl        String            @default(uuid())
   FormSubmisstion FormSubmisstion[]
+
+  @@unique([name, userId]) // user cannot craete form with same name
 }
 
 model FormSubmisstion {
