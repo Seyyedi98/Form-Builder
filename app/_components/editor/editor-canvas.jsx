@@ -1,5 +1,7 @@
 "use client";
 
+import { useDroppable } from "@dnd-kit/core";
+import Canvas from "./canvas";
 import PreviewDialogBtn from "./preview-dialog-btn";
 import PublishFormBtn from "./publish-form-btn";
 import SaveFormBtn from "./save-form-btn";
@@ -22,7 +24,12 @@ const FormBuilder = ({ form }) => {
           )}
         </div>
       </div>
-      <div>main</div>
+      <div
+        className="flex w-full flex-grow items-center justify-center relative
+      overflow-y-auto h[200px] bg-accent dark:bg-[url(/paper-dark.svg)] bg-[url(/paper.svg)]"
+      >
+        <Canvas />
+      </div>
     </div>
   );
 };
