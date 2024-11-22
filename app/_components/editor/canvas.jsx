@@ -1,21 +1,44 @@
 "use client";
 
-import CanvasSidebar from "./canvas-sudebar";
+import { useDroppable } from "@dnd-kit/core";
+import CanvasSidebar from "./canvas-sidebar";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const Canvas = () => {
+  const [elements, setElements] = useState([]);
+  const droppable = useDroppable({
+    id: "designer-drop-area",
+    data: {
+      isDesignerDropArea: true,
+    },
+  });
+
   return (
     <div className="flex w-full h-full">
+      <CanvasSidebar />
       <div className="p-4 w-full">
         <div
-          className="bg-background msx-w-[920px] h-full m-auto rounded-xl flex flex-col
-        flex-grow items-center justify-start flex-1 overflow-y-auto"
+          ref={droppable.setNodeRef}
+          className={cn(
+            "bg-background msx-w-[920px] transition-all duration-300 h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
+            droppable.isOver && "ring-2 ring-primary/30"
+          )}
         >
-          <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
-            اینجا رها کنید
-          </p>
+          {!droppable.isOver && (
+            <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
+              اینجا رها کنید
+            </p>
+          )}
+
+          {/* Display drop area  */}
+          {droppable.isOver && (
+            <div className="p-4 w-full">
+              <div className="h-[120px] rounded-md bg-primary/30"></div>
+            </div>
+          )}
         </div>
       </div>
-      <CanvasSidebar />
     </div>
   );
 };
