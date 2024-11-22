@@ -1,8 +1,12 @@
 "use client";
 
+import { CreateForm } from "@/actions/form/create-form";
 import { FormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FileDiff } from "lucide-react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { ImSpinner2 } from "react-icons/im";
 import { Button } from "../shadcn/button";
 import {
   Dialog,
@@ -23,13 +27,12 @@ import {
 } from "../shadcn/form";
 import { Input } from "../shadcn/input";
 import { Textarea } from "../shadcn/textarea";
-import { ImSpinner2 } from "react-icons/im";
-import { useState, useTransition } from "react";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
-import { CreateForm } from "@/actions/form/create-form";
+import { useRouter } from "next/navigation";
 
 const CreateFormButton = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -50,7 +53,7 @@ const CreateFormButton = () => {
         if (data?.success) {
           setSuccess(data.success);
           form.reset();
-          console.log(data?.formId);
+          router.push(`/dashboard/builder/${data.formId}`);
         }
         if (data?.error) {
           setError(data.error);
@@ -62,7 +65,17 @@ const CreateFormButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>فرم جدید</Button>
+        <Button
+          variant="outline"
+          className="group border border-primary/40 h-[190px] items-center
+         justify-center flex flex-col hover:border-primary hover:cursor-pointer
+         border-dashed gap-4"
+        >
+          <FileDiff className="w-24 h-24 text-muted-primary group-hover:text-primary" />
+          <p className="font-bold text-xl text-muted-foreground group-hover:text-primary">
+            ایجاد فرم جدید
+          </p>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
