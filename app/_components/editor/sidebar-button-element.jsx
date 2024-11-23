@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 
 const SidebarBtnElement = ({ formElement }) => {
   // console.log("Element", formElement);
-  const { label, icon: Icon } = formElement.designerBtnElement;
+  const { label, icon: Icon } = formElement.CanvasBtnElement;
 
   const draggable = useDraggable({
-    id: `designer-btn-${formElement.type}`,
+    id: `Canvas-btn-${formElement.type}`,
     data: {
       type: formElement.type,
-      isDesignerBtnElement: true,
+      isCanvasBtnElement: true,
     },
   });
   return (
@@ -32,7 +32,7 @@ const SidebarBtnElement = ({ formElement }) => {
 };
 
 export const SidebarBtnElementDragOverly = ({ formElement }) => {
-  const { label, icon: Icon } = formElement.designerBtnElement;
+  const { label, icon: Icon } = formElement.CanvasBtnElement;
 
   return (
     <Button

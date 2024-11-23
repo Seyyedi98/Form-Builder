@@ -1,18 +1,39 @@
 "use client";
 
-import { useDroppable } from "@dnd-kit/core";
+import { useDndMonitor, useDroppable } from "@dnd-kit/core";
 import CanvasSidebar from "./canvas-sidebar";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import useCanvas from "@/hooks/use-canvas";
+import { FormElements } from "./form-elements";
+import { idGenerator } from "@/lib/idGenerator";
+import CanvasElementWrapper from "./canvas-element-wrapper";
 
 const Canvas = () => {
   const { elements, addElement } = useCanvas();
 
   const droppable = useDroppable({
-    id: "designer-drop-area",
+    id: "canvas-drop-area",
     data: {
-      isDesignerDropArea: true,
+      isCanvasDropArea: true,
+    },
+  });
+
+  useDndMonitor({
+    onDragEnd: (event) => {
+      const { active, over } = event;
+      if (!active || !over) return;
+
+      const isCanvasBtnElement = active.data?.current?.isCanvasBtnElement;
+
+      if (isCanvasBtnElement) {
+        const type = active.data?.current?.type;
+        const newElement = FormElements[type].construct(idGenerator());
+
+        addElement(0, newElement);
+
+        console.log(newElement);
+      }
     },
   });
 
@@ -40,6 +61,14 @@ const Canvas = () => {
             </div>
           )}
         </div>
+        {/* Show dropped elemets */}
+        {elements.length > 0 && (
+          <div className="flex flex-col text-background w-full gap-2 p-4">
+            {elements.map((element) => (
+              <CanvasElementWrapper key={element.id} element={element} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

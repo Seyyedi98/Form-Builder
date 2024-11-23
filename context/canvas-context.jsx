@@ -5,7 +5,7 @@ import { createContext, useState } from "react";
 export const CanvasContext = createContext(null);
 
 export default function CanvasContextProvider({ children }) {
-  const [elements, setElements] = useState();
+  const [elements, setElements] = useState([]);
 
   const addElement = (index, element) => {
     setElements((prev) => {

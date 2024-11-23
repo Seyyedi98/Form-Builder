@@ -20,7 +20,7 @@ const DragOverlayWrapper = () => {
   if (!draggedItem) return null;
 
   let node = <div>No drag overly</div>;
-  const isSidebarBtnElement = draggedItem.data?.current?.isDesignerBtnElement;
+  const isSidebarBtnElement = draggedItem.data?.current?.isCanvasBtnElement;
 
   if (isSidebarBtnElement) {
     const type = draggedItem.data?.current?.type;

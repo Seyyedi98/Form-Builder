@@ -17,12 +17,12 @@ export const TextFieldFormElement = {
     },
   }),
 
-  designerBtnElement: {
+  CanvasBtnElement: {
     icon: MdTextFields,
     label: "Text Filed",
   },
 
-  designerComponent: () => <div>Designer Component</div>,
+  CanvasComponent: () => <div>Canvas Component</div>,
   formComponent: () => <div>Form Component</div>,
   propertiesComponent: () => <div>Propertis Component</div>,
 };
