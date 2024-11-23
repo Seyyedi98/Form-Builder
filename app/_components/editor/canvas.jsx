@@ -32,7 +32,7 @@ const Canvas = () => {
 
         addElement(0, newElement);
 
-        console.log(newElement);
+        // console.log(newElement);
       }
     },
   });
@@ -48,7 +48,7 @@ const Canvas = () => {
             droppable.isOver && "ring-2 ring-primary/30"
           )}
         >
-          {!droppable.isOver && (
+          {!droppable.isOver && elements.length === 0 && (
             <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
               اینجا رها کنید
             </p>
@@ -60,15 +60,15 @@ const Canvas = () => {
               <div className="h-[120px] rounded-md bg-primary/30"></div>
             </div>
           )}
+          {/* Show dropped elemets */}
+          {elements.length > 0 && (
+            <div className="flex flex-col w-full gap-2 p-4">
+              {elements.map((element) => (
+                <CanvasElementWrapper key={element.id} element={element} />
+              ))}
+            </div>
+          )}
         </div>
-        {/* Show dropped elemets */}
-        {elements.length > 0 && (
-          <div className="flex flex-col text-background w-full gap-2 p-4">
-            {elements.map((element) => (
-              <CanvasElementWrapper key={element.id} element={element} />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
