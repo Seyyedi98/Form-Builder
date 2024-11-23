@@ -4,9 +4,11 @@ import { useDroppable } from "@dnd-kit/core";
 import CanvasSidebar from "./canvas-sidebar";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import useCanvas from "@/hooks/use-canvas";
 
 const Canvas = () => {
-  const [elements, setElements] = useState([]);
+  const { elements, addElement } = useCanvas();
+
   const droppable = useDroppable({
     id: "designer-drop-area",
     data: {

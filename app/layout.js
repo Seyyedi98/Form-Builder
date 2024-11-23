@@ -3,6 +3,7 @@ import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "../providers/ThemeProvider";
+import CanvasContextProvider from "@/context/canvas-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,9 +36,11 @@ export default async function RootLayout({ children }) {
         <body
           className={`${yekan.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-          </ThemeProvider>
+          <CanvasContextProvider>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              {children}
+            </ThemeProvider>
+          </CanvasContextProvider>
         </body>
       </html>
     </SessionProvider>

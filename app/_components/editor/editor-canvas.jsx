@@ -8,13 +8,6 @@ import SaveFormBtn from "./save-form-btn";
 import DragOverlayWrapper from "./drag-overlay-wrapper";
 
 const FormBuilder = ({ form }) => {
-  const droppable = useDroppable({
-    id: "designer-drop-area",
-    data: {
-      isDesignerDropArea: true,
-    },
-  });
-
   return (
     <DndContext>
       <div className="flex flex-col w-full">
@@ -25,7 +18,7 @@ const FormBuilder = ({ form }) => {
           </h2>
           <div className="flex items-center gap-2">
             <PreviewDialogBtn />
-            {!form.publioshed && (
+            {!form.published && (
               <>
                 <SaveFormBtn />
                 <PublishFormBtn />
