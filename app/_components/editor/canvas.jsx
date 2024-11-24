@@ -1,13 +1,12 @@
 "use client";
 
-import { useDndMonitor, useDroppable } from "@dnd-kit/core";
-import CanvasSidebar from "./canvas-sidebar";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import useCanvas from "@/hooks/use-canvas";
-import { FormElements } from "./form-elements";
 import { idGenerator } from "@/lib/idGenerator";
+import { cn } from "@/lib/utils";
+import { useDndMonitor, useDroppable } from "@dnd-kit/core";
 import CanvasElementWrapper from "./canvas-element-wrapper";
+import CanvasSidebar from "./canvas-sidebar";
+import { FormElements } from "./form-elements";
 
 const Canvas = () => {
   const { elements, addElement } = useCanvas();
@@ -55,7 +54,7 @@ const Canvas = () => {
           )}
 
           {/* Display drop area  */}
-          {droppable.isOver && (
+          {droppable.isOver && elements.length === 0 && (
             <div className="p-4 w-full">
               <div className="h-[120px] rounded-md bg-primary/30"></div>
             </div>

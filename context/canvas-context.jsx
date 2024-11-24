@@ -15,8 +15,12 @@ export default function CanvasContextProvider({ children }) {
     });
   };
 
+  const removeElement = (id) => {
+    setElements((prev) => prev.filter((elements) => elements.id !== id));
+  };
+
   return (
-    <CanvasContext.Provider value={{ elements, addElement }}>
+    <CanvasContext.Provider value={{ elements, addElement, removeElement }}>
       {children}
     </CanvasContext.Provider>
   );
