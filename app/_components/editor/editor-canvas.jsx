@@ -1,15 +1,37 @@
 "use client";
 
-import { DndContext, useDroppable } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import Canvas from "./canvas";
+import DragOverlayWrapper from "./drag-overlay-wrapper";
 import PreviewDialogBtn from "./preview-dialog-btn";
 import PublishFormBtn from "./publish-form-btn";
 import SaveFormBtn from "./save-form-btn";
-import DragOverlayWrapper from "./drag-overlay-wrapper";
 
 const FormBuilder = ({ form }) => {
+  const mouseSensor = useSensor(MouseSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 10,
+    },
+  });
+
+  const touchSensor = useSensor(TouchSensor, {
+    // Press delay of 250ms, with tolerance of 5px of movement
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+  const sensors = useSensors(mouseSensor, touchSensor);
+
   return (
-    <DndContext>
+    <DndContext sensors={sensors}>
       <div className="flex flex-col w-full">
         <div className="flex justify-between border-b-2 p-4 gap-3 items-center">
           <h2 className="truncate font-medium">
