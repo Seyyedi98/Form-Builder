@@ -6,6 +6,7 @@ export const CanvasContext = createContext(null);
 
 export default function CanvasContextProvider({ children }) {
   const [elements, setElements] = useState([]);
+  const [selectedElement, setSelectedElement] = useState(null);
 
   const addElement = (index, element) => {
     setElements((prev) => {
@@ -19,8 +20,26 @@ export default function CanvasContextProvider({ children }) {
     setElements((prev) => prev.filter((elements) => elements.id !== id));
   };
 
+  const updateElement = (id, element) => {
+    setElements((prev) => {
+      const newElements = [...prev];
+      const index = newElements.findIndex((el) => el.id === id);
+      newElements[index] = element;
+      return newElements;
+    });
+  };
+
   return (
-    <CanvasContext.Provider value={{ elements, addElement, removeElement }}>
+    <CanvasContext.Provider
+      value={{
+        elements,
+        addElement,
+        removeElement,
+        updateElement,
+        selectedElement,
+        setSelectedElement,
+      }}
+    >
       {children}
     </CanvasContext.Provider>
   );

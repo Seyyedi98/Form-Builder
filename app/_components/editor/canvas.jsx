@@ -9,7 +9,8 @@ import CanvasSidebar from "./canvas-sidebar";
 import { FormElements } from "./form-elements";
 
 const Canvas = () => {
-  const { elements, addElement } = useCanvas();
+  const { elements, addElement, selectedElement, setSelectedElement } =
+    useCanvas();
 
   const droppable = useDroppable({
     id: "canvas-drop-area",
@@ -30,7 +31,6 @@ const Canvas = () => {
         const newElement = FormElements[type].construct(idGenerator());
 
         addElement(0, newElement);
-
         // console.log(newElement);
       }
     },
@@ -39,7 +39,13 @@ const Canvas = () => {
   return (
     <div className="flex w-full h-full">
       <CanvasSidebar />
-      <div className="p-4 w-full">
+      <div
+        className="p-4 w-full"
+        onClick={(e) => {
+          e.stopPropagation();
+          if (selectedElement) setSelectedElement(null);
+        }}
+      >
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -59,6 +65,7 @@ const Canvas = () => {
               <div className="h-[120px] rounded-md bg-primary/30"></div>
             </div>
           )}
+
           {/* Show dropped elemets */}
           {elements.length > 0 && (
             <div className="flex flex-col w-full gap-2 p-4">

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 const CanvasElementWrapper = ({ element }) => {
   const [mouseIsOver, setMouseIsOver] = useState(false);
-  const { removeElement } = useCanvas();
+  const { removeElement, selectedElement, setSelectedElement } = useCanvas();
 
   const draggable = useDraggable({
     id: element.id + "-drag-handler",
@@ -58,6 +58,9 @@ const CanvasElementWrapper = ({ element }) => {
       onMouseLeave={() => {
         setMouseIsOver(false);
       }}
+      onClick={(e) => {
+        setSelectedElement(element);
+      }}
     >
       {/* Top droppable half */}
       <div
@@ -79,7 +82,8 @@ const CanvasElementWrapper = ({ element }) => {
               className="justify-center h-full border rounded-md rounded-r-none bg-red-500
             "
               variant="outline"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 removeElement(element.id);
               }}
             >
@@ -90,9 +94,7 @@ const CanvasElementWrapper = ({ element }) => {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
         animate-pulse"
           >
-            <p className="text-muted-foreground text-sm">
-              Click for properties or drag to move
-            </p>
+            <p className="text-muted-foreground text-sm">کلیک کنید یا بکشید</p>
           </div>
         </>
       )}
