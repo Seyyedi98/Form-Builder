@@ -26,7 +26,7 @@ const CanvasElementWrapper = ({ element }) => {
     id: element.id + "-top",
     data: {
       type: element.type,
-      element: element.id,
+      elementId: element.id,
       isTopHalfCanvasElement: true,
     },
   });
@@ -35,7 +35,7 @@ const CanvasElementWrapper = ({ element }) => {
     id: element.id + "--bottom",
     data: {
       type: element.type,
-      element: element.id,
+      elementId: element.id,
       isBottomHalfCanvasElement: true,
     },
   });
@@ -59,6 +59,7 @@ const CanvasElementWrapper = ({ element }) => {
         setMouseIsOver(false);
       }}
       onClick={(e) => {
+        e.stopPropagation();
         setSelectedElement(element);
       }}
     >

@@ -25,14 +25,50 @@ const Canvas = () => {
       if (!active || !over) return;
 
       const isCanvasBtnElement = active.data?.current?.isCanvasBtnElement;
+      const isDroppingOverCanvasArea = over.data?.current?.isCanvasDropArea;
 
-      if (isCanvasBtnElement) {
+      const isDroppingOverCanvasElementTopHalf =
+        over.data?.current?.isTopHalfCanvasElement;
+      const isDroppingOverCanvasElementBottomHalf =
+        over.data?.current?.isBottomHalfCanvasElement;
+
+      const droppingOverCanvasElement =
+        isDroppingOverCanvasElementTopHalf ||
+        isDroppingOverCanvasElementBottomHalf;
+
+      ///////////////////// 1 ///////////////////////
+      // When drop new element on canvas, It will be added as a last item
+      if (isCanvasBtnElement && isDroppingOverCanvasArea) {
         const type = active.data?.current?.type;
         const newElement = FormElements[type].construct(idGenerator());
 
-        addElement(0, newElement);
-        // console.log(newElement);
+        addElement(elements.length, newElement);
+        return;
       }
+
+      ///////////////////// 2 ///////////////////////
+      // Drop new element on top or bottom half on canvas element
+      if (isCanvasBtnElement && droppingOverCanvasElement) {
+        const type = active.data?.current?.type;
+        const newElement = FormElements[type].construct(idGenerator());
+
+        const overId = over.data?.current?.elementId;
+
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+        if (overElementIndex === -1) throw new Error("Element not found");
+
+        let indexForNewElement = overElementIndex; // top half
+        if (isDroppingOverCanvasElementBottomHalf) {
+          indexForNewElement = indexForNewElement + 1;
+        }
+
+        addElement(indexForNewElement, newElement);
+        return;
+      }
+
+      ///////////////////// 2 ///////////////////////
+      // Drag canvas element and reposition them
+      const reOrderCanvasElement = droppingOverCanvasElement;
     },
   });
 
@@ -41,8 +77,7 @@ const Canvas = () => {
       <CanvasSidebar />
       <div
         className="p-4 w-full"
-        onClick={(e) => {
-          e.stopPropagation();
+        onClick={() => {
           if (selectedElement) setSelectedElement(null);
         }}
       >
