@@ -9,8 +9,13 @@ import CanvasSidebar from "./canvas-sidebar";
 import { FormElements } from "./form-elements";
 
 const Canvas = () => {
-  const { elements, addElement, selectedElement, setSelectedElement } =
-    useCanvas();
+  const {
+    elements,
+    addElement,
+    removeElement,
+    selectedElement,
+    setSelectedElement,
+  } = useCanvas();
 
   const droppable = useDroppable({
     id: "canvas-drop-area",
@@ -68,7 +73,36 @@ const Canvas = () => {
 
       ///////////////////// 2 ///////////////////////
       // Drag canvas element and reposition them
-      const reOrderCanvasElement = droppingOverCanvasElement;
+      const isDraggingCanvasElement = active.data?.current?.isCanvasElement;
+
+      const reOrderCanvasElement =
+        droppingOverCanvasElement && isDraggingCanvasElement;
+
+      // Find index of active element and move it after or before of over element
+      if (reOrderCanvasElement) {
+        const activeId = active.data?.current?.elementId;
+        const overId = over.data?.current?.elementId;
+
+        const activeElementIndex = elements.findIndex(
+          (el) => el.id === activeId
+        );
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+
+        if (activeElementIndex === -1 || overElementIndex === -1) {
+          throw new Error("Element not found");
+        }
+
+        const activeElement = { ...elements[activeElementIndex] };
+
+        removeElement(activeId);
+
+        let indexForNewElement = overElementIndex; // top half
+        if (isDroppingOverCanvasElementBottomHalf) {
+          indexForNewElement = indexForNewElement + 1;
+        }
+
+        addElement(indexForNewElement, activeElement);
+      }
     },
   });
 
@@ -85,7 +119,7 @@ const Canvas = () => {
           ref={droppable.setNodeRef}
           className={cn(
             "bg-background msx-w-[920px] transition-all duration-300 h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
-            droppable.isOver && "ring-2 ring-primary/30"
+            droppable.isOver && "ring-4 ring-primary/70"
           )}
         >
           {!droppable.isOver && elements.length === 0 && (
