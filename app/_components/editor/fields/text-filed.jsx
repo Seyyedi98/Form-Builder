@@ -42,7 +42,7 @@ export const TextFieldFormElement = {
   },
 
   CanvasComponent: CanvasComponent,
-  formComponent: () => <div>Form Component</div>,
+  formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 };
 
@@ -56,6 +56,23 @@ function CanvasComponent({ elementInstance }) {
         {required && "*"}
       </Label>
       <Input readOnly disabled placeholder={placeHolder} />
+      {helperText && (
+        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
+    </div>
+  );
+}
+
+function FormComponent({ elementInstance }) {
+  const element = elementInstance;
+  const { label, required, placeHolder, helperText } = element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label>
+        {label}
+        {required && "*"}
+      </Label>
+      <Input placeholder={placeHolder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
       )}
