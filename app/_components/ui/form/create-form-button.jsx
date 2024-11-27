@@ -30,6 +30,7 @@ import { Textarea } from "../shadcn/textarea";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 
 const CreateFormButton = () => {
   const router = useRouter();
@@ -51,6 +52,10 @@ const CreateFormButton = () => {
       setSuccess("");
       await CreateForm(values).then((data) => {
         if (data?.success) {
+          toast({
+            title: "عملیات موفقیت آمیز",
+            description: "فرم با موفقت ساخته شد",
+          });
           setSuccess(data.success);
           form.reset();
           router.push(`/dashboard/builder/${data.formId}`);

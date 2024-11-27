@@ -21,6 +21,7 @@ export async function CreateForm(data) {
       userId: user.id,
       name: data.name,
       description: data.description,
+      content: "[]",
     },
   });
 

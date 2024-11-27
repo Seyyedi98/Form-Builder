@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "../providers/ThemeProvider";
 import CanvasContextProvider from "@/context/canvas-context";
+import { Toaster } from "./_components/ui/shadcn/toaster";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
               {children}
             </ThemeProvider>
           </CanvasContextProvider>
+          <Toaster />
         </body>
       </html>
     </SessionProvider>

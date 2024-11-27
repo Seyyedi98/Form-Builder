@@ -12,8 +12,12 @@ import DragOverlayWrapper from "./drag-overlay-wrapper";
 import PreviewDialogBtn from "./preview-dialog-btn";
 import PublishFormBtn from "./publish-form-btn";
 import SaveFormBtn from "./save-form-btn";
+import { useEffect } from "react";
+import useCanvas from "@/hooks/use-canvas";
 
 const FormBuilder = ({ form }) => {
+  const { setElements } = useCanvas();
+
   const mouseSensor = useSensor(MouseSensor, {
     // Require the mouse to move by 10 pixels before activating
     activationConstraint: {
@@ -30,6 +34,11 @@ const FormBuilder = ({ form }) => {
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
+  useEffect(() => {
+    const elements = JSON.parse(form.content);
+    setElements(elements);
+  }, [form, setElements]);
+
   return (
     <DndContext sensors={sensors}>
       <div className="flex flex-col w-full">
@@ -42,7 +51,7 @@ const FormBuilder = ({ form }) => {
             <PreviewDialogBtn />
             {!form.published && (
               <>
-                <SaveFormBtn />
+                <SaveFormBtn id={form.id} />
                 <PublishFormBtn />
               </>
             )}

@@ -33,6 +33,7 @@ export default function CanvasContextProvider({ children }) {
     <CanvasContext.Provider
       value={{
         elements,
+        setElements,
         addElement,
         removeElement,
         updateElement,
