@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "../../ui/shadcn/form";
 import { Switch } from "../../ui/shadcn/switch";
+import { cn } from "@/lib/utils";
 
 const type = "TextField";
 
@@ -44,6 +45,14 @@ export const TextFieldFormElement = {
   CanvasComponent: CanvasComponent,
   formComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
+
+  validate: (formElement, currentValue) => {
+    const element = formElement;
+    if (element.extraAttributes.required) {
+      return currentValue.length;
+    }
+    return true;
+  },
 };
 
 function CanvasComponent({ elementInstance }) {
@@ -64,28 +73,52 @@ function CanvasComponent({ elementInstance }) {
   );
 }
 
-function FormComponent({ elementInstance, submitValue }) {
-  const [value, setValue] = useState("");
+function FormComponent({
+  elementInstance,
+  submitValue,
+  isInvalid,
+  defaultValue,
+}) {
+  const [value, setValue] = useState(defaultValue || "");
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(isInvalid === true);
+  }, [isInvalid]);
 
   const element = elementInstance;
   const { label, required, placeHolder, helperText } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label>
+      <Label className={cn(error && "text-red-500")}>
         {label}
         {required && "*"}
       </Label>
       <Input
+        className={cn(error && "border-red-500")}
         placeholder={placeHolder}
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
           if (!submitValue) return;
+          const isValid = TextFieldFormElement.validate(
+            element,
+            e.target.value
+          );
+          setError(!isValid);
+          if (!isValid) return;
           submitValue(element.id, e.target.value);
         }}
         value={value}
       />
       {helperText && (
-        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+        <p
+          className={cn(
+            "text-muted-foreground text-[0.8rem]",
+            error && "text-red-500"
+          )}
+        >
+          {helperText}
+        </p>
       )}
     </div>
   );
