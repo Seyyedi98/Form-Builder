@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "../providers/ThemeProvider";
 import CanvasContextProvider from "@/context/canvas-context";
 import { Toaster } from "./_components/ui/shadcn/toaster";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default async function RootLayout({ children }) {
         <body
           className={`${yekan.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <NextTopLoader />
           <CanvasContextProvider>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               {children}

@@ -63,7 +63,14 @@ function StatsCards(props) {
   );
 }
 
-function StatsCard({ title, value, icon, helperText, loading, className }) {
+export function StatsCard({
+  title,
+  value,
+  icon,
+  helperText,
+  loading,
+  className,
+}) {
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">

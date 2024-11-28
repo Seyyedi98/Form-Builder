@@ -71,7 +71,7 @@ const Canvas = () => {
         return;
       }
 
-      ///////////////////// 2 ///////////////////////
+      ///////////////////// 3 ///////////////////////
       // Drag canvas element and reposition them
       const isDraggingCanvasElement = active.data?.current?.isCanvasElement;
 
