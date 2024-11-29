@@ -122,6 +122,8 @@ model Form {
 model FormSubmisstion {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   formId    Int
   form      Form     @relation(fields: [formId], references: [id])
+  content   String   @db.LongText
 }
