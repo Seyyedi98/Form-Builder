@@ -1,11 +1,14 @@
 "use client";
 
 import useCanvas from "@/hooks/use-canvas";
-import { TitleFieldPropertiesSchema } from "@/schemas";
+import {
+  SpacerFieldPropertiesSchema,
+  TitleFieldPropertiesSchema,
+} from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LuHeading1 } from "react-icons/lu";
+import { LuHeading1, LuSeparatorHorizontal } from "react-icons/lu";
 import {
   Form,
   FormControl,
@@ -16,14 +19,15 @@ import {
 } from "../../ui/shadcn/form";
 import { Input } from "../../ui/shadcn/input";
 import { Label } from "../../ui/shadcn/label";
+import { Slider } from "../../ui/shadcn/slider";
 
-const type = "TitleField";
+const type = "SpacerField";
 
 const extraAttributes = {
-  title: "Title Field",
+  height: 20, // px
 };
 
-export const TitleFieldFormElement = {
+export const SpacerFieldFormElement = {
   type,
   construct: (id) => ({
     id,
@@ -32,8 +36,8 @@ export const TitleFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: LuHeading1,
-    label: "Title Filed",
+    icon: LuSeparatorHorizontal,
+    label: "Spacer Filed",
   },
 
   CanvasComponent: CanvasComponent,
@@ -46,19 +50,19 @@ export const TitleFieldFormElement = {
 function CanvasComponent({ elementInstance }) {
   const element = elementInstance;
 
-  const { title } = element.extraAttributes;
+  const { height } = element.extraAttributes;
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <Label className="text-muted-foreground">عنوان</Label>
-      <p className="text-2xl">{title}</p>
+    <div className="flex flex-col gap-2 w-full items-center">
+      <Label className="text-muted-foreground">فاصله: {height} px</Label>
+      <LuSeparatorHorizontal className="w-8 h-8" />
     </div>
   );
 }
 
 function FormComponent({ elementInstance }) {
   const element = elementInstance;
-  const { title } = element.extraAttributes;
-  return <p className="text-2xl">{title}</p>;
+  const { height } = element.extraAttributes;
+  return <div style={{ height, width: "100%" }}></div>;
 }
 
 function PropertiesComponent({ elementInstance }) {
@@ -66,10 +70,10 @@ function PropertiesComponent({ elementInstance }) {
   const { updateElement } = useCanvas();
 
   const form = useForm({
-    resolver: zodResolver(TitleFieldPropertiesSchema),
+    resolver: zodResolver(SpacerFieldPropertiesSchema),
     mode: "onBlur",
     defaultValues: {
-      title: element.extraAttributes.title,
+      height: element.extraAttributes.height,
     },
   });
 
@@ -78,11 +82,11 @@ function PropertiesComponent({ elementInstance }) {
   }, [element, form]);
 
   function applyChanges(values) {
-    const { title } = values;
+    const { height } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
-        title,
+        height,
       },
     });
   }
@@ -99,17 +103,18 @@ function PropertiesComponent({ elementInstance }) {
         {/* Form Title */}
         <FormField
           control={form.control}
-          name="title"
+          name="height"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>عنوان</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.currentTarget.blur();
-                    }
+              <FormLabel>ارتفاع: {form.watch("height")}</FormLabel>
+              <FormControl className="pt-2">
+                <Slider
+                  defaultValue={[field.value]}
+                  min={5}
+                  max={200}
+                  step={1}
+                  onValueChange={(value) => {
+                    field.onChange(value[0]);
                   }}
                 />
               </FormControl>

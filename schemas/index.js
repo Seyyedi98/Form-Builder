@@ -89,3 +89,11 @@ export const propertiesSchema = z.object({
 export const TitleFieldPropertiesSchema = z.object({
   title: z.string().min(2).max(50),
 });
+
+export const ParagraphFieldPropertiesSchema = z.object({
+  text: z.string().min(1),
+});
+
+export const SpacerFieldPropertiesSchema = z.object({
+  height: z.number().min(5).max(200),
+});

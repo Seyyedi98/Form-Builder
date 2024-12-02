@@ -5,7 +5,7 @@ import { TitleFieldPropertiesSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LuHeading1 } from "react-icons/lu";
+import { LuHeading1, LuHeading2 } from "react-icons/lu";
 import {
   Form,
   FormControl,
@@ -20,10 +20,10 @@ import { Label } from "../../ui/shadcn/label";
 const type = "TitleField";
 
 const extraAttributes = {
-  title: "Title Field",
+  title: "Subtitle Field",
 };
 
-export const TitleFieldFormElement = {
+export const SubtitleFieldFormElement = {
   type,
   construct: (id) => ({
     id,
@@ -32,8 +32,8 @@ export const TitleFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: LuHeading1,
-    label: "Title Filed",
+    icon: LuHeading2,
+    label: "Subtitle Field",
   },
 
   CanvasComponent: CanvasComponent,
@@ -50,7 +50,7 @@ function CanvasComponent({ elementInstance }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label className="text-muted-foreground">عنوان</Label>
-      <p className="text-2xl">{title}</p>
+      <p className="text-lg">{title}</p>
     </div>
   );
 }
@@ -58,7 +58,7 @@ function CanvasComponent({ elementInstance }) {
 function FormComponent({ elementInstance }) {
   const element = elementInstance;
   const { title } = element.extraAttributes;
-  return <p className="text-2xl">{title}</p>;
+  return <p className="text-lg">{title}</p>;
 }
 
 function PropertiesComponent({ elementInstance }) {

@@ -10,15 +10,25 @@ const FormElementsSidebar = () => {
         برای افزودن به صفحه، بکشید و رها کنید
       </p>
       <Separator className="my-2" />
-      <div className="grid grid-cols-1 md:grid-cols-2 place-items-center">
+      <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 place-items-center">
         <p
-          className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2
+          className="text-sm mt-4 text-muted-foreground col-span-1 md:col-span-2 my-2
         place-self-start"
         >
           فیلد ها
         </p>
-        <SidebarBtnElement formElement={FormElements.TextField} />
         <SidebarBtnElement formElement={FormElements.TitleField} />
+        <SidebarBtnElement formElement={FormElements.SubtitleField} />
+        <SidebarBtnElement formElement={FormElements.ParagraphField} />
+        <SidebarBtnElement formElement={FormElements.SeparatorField} />
+        <p
+          className="text-sm mt-4 text-muted-foreground col-span-1 md:col-span-2 my-2
+        place-self-start"
+        >
+          گزینه های فرم
+        </p>
+        <SidebarBtnElement formElement={FormElements.TextField} />
+        <SidebarBtnElement formElement={FormElements.SpacerField} />
       </div>
     </div>
   );

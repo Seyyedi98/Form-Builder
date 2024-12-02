@@ -1,7 +1,10 @@
 "use client";
 
 import useCanvas from "@/hooks/use-canvas";
-import { TitleFieldPropertiesSchema } from "@/schemas";
+import {
+  ParagraphFieldPropertiesSchema,
+  TitleFieldPropertiesSchema,
+} from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -16,14 +19,16 @@ import {
 } from "../../ui/shadcn/form";
 import { Input } from "../../ui/shadcn/input";
 import { Label } from "../../ui/shadcn/label";
+import { BsTextParagraph } from "react-icons/bs";
+import { Textarea } from "../../ui/shadcn/textarea";
 
-const type = "TitleField";
+const type = "ParagraphField";
 
 const extraAttributes = {
-  title: "Title Field",
+  text: "Paragraph Field",
 };
 
-export const TitleFieldFormElement = {
+export const ParagraphFieldFormElement = {
   type,
   construct: (id) => ({
     id,
@@ -32,8 +37,8 @@ export const TitleFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: LuHeading1,
-    label: "Title Filed",
+    icon: BsTextParagraph,
+    label: "Paragraph Filed",
   },
 
   CanvasComponent: CanvasComponent,
@@ -46,19 +51,19 @@ export const TitleFieldFormElement = {
 function CanvasComponent({ elementInstance }) {
   const element = elementInstance;
 
-  const { title } = element.extraAttributes;
+  const { text } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label className="text-muted-foreground">عنوان</Label>
-      <p className="text-2xl">{title}</p>
+      <Label className="text-muted-foreground">متن</Label>
+      <p>{text}</p>
     </div>
   );
 }
 
 function FormComponent({ elementInstance }) {
   const element = elementInstance;
-  const { title } = element.extraAttributes;
-  return <p className="text-2xl">{title}</p>;
+  const { text } = element.extraAttributes;
+  return <p>{text}</p>;
 }
 
 function PropertiesComponent({ elementInstance }) {
@@ -66,10 +71,10 @@ function PropertiesComponent({ elementInstance }) {
   const { updateElement } = useCanvas();
 
   const form = useForm({
-    resolver: zodResolver(TitleFieldPropertiesSchema),
+    resolver: zodResolver(ParagraphFieldPropertiesSchema),
     mode: "onBlur",
     defaultValues: {
-      title: element.extraAttributes.title,
+      text: element.extraAttributes.text,
     },
   });
 
@@ -78,11 +83,11 @@ function PropertiesComponent({ elementInstance }) {
   }, [element, form]);
 
   function applyChanges(values) {
-    const { title } = values;
+    const { text } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
-        title,
+        text,
       },
     });
   }
@@ -99,12 +104,13 @@ function PropertiesComponent({ elementInstance }) {
         {/* Form Title */}
         <FormField
           control={form.control}
-          name="title"
+          name="text"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>عنوان</FormLabel>
+              <FormLabel>متن</FormLabel>
               <FormControl>
-                <Input
+                <Textarea
+                  rows={5}
                   {...field}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
