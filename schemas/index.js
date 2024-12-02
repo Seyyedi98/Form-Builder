@@ -86,6 +86,14 @@ export const propertiesSchema = z.object({
   placeHolder: z.string().max(50),
 });
 
+export const TextAreaFieldPropertiesSchema = z.object({
+  label: z.string().min(2).max(50),
+  helperText: z.string().max(200),
+  required: z.boolean().default(false),
+  placeHolder: z.string().max(50),
+  rows: z.number().min(1).max(10),
+});
+
 export const TitleFieldPropertiesSchema = z.object({
   title: z.string().min(2).max(50),
 });
