@@ -1,3 +1,4 @@
+import { NumberFieldFormElement } from "./fields/number-filed";
 import { ParagraphFieldFormElement } from "./fields/paragraph-filed";
 import { SeparatorFieldFormElement } from "./fields/separator";
 import { SpacerFieldFormElement } from "./fields/spacer-filed";
@@ -12,4 +13,5 @@ export const FormElements = {
   ParagraphField: ParagraphFieldFormElement,
   SeparatorField: SeparatorFieldFormElement,
   SpacerField: SpacerFieldFormElement,
+  NumberField: NumberFieldFormElement,
 };

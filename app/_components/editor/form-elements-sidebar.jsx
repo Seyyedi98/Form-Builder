@@ -21,6 +21,7 @@ const FormElementsSidebar = () => {
         <SidebarBtnElement formElement={FormElements.SubtitleField} />
         <SidebarBtnElement formElement={FormElements.ParagraphField} />
         <SidebarBtnElement formElement={FormElements.SeparatorField} />
+        <SidebarBtnElement formElement={FormElements.SpacerField} />
         <p
           className="text-sm mt-4 text-muted-foreground col-span-1 md:col-span-2 my-2
         place-self-start"
@@ -28,7 +29,7 @@ const FormElementsSidebar = () => {
           گزینه های فرم
         </p>
         <SidebarBtnElement formElement={FormElements.TextField} />
-        <SidebarBtnElement formElement={FormElements.SpacerField} />
+        <SidebarBtnElement formElement={FormElements.NumberField} />
       </div>
     </div>
   );
