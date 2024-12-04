@@ -21,5 +21,5 @@ export const FormElements = {
   TextAreaField: TextAreaFieldFormElement,
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
-  checkboxField: checkboxFieldFormElement,
+  CheckboxField: checkboxFieldFormElement,
 };
