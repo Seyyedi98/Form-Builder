@@ -105,3 +105,16 @@ export const ParagraphFieldPropertiesSchema = z.object({
 export const SpacerFieldPropertiesSchema = z.object({
   height: z.number().min(5).max(200),
 });
+
+export const DateFieldPropertiesSchema = z.object({
+  label: z.string().min(2).max(50),
+  helperText: z.string().max(200),
+  required: z.boolean().default(false),
+});
+
+export const SelectFieldPropertiesSchema = z.object({
+  label: z.string().min(2).max(50),
+  helperText: z.string().max(200),
+  required: z.boolean().default(false),
+  options: z.array(z.string()).default([]),
+});

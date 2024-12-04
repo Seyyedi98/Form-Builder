@@ -4,7 +4,7 @@ import { MdTextFields } from "react-icons/md";
 import { Label } from "../../ui/shadcn/label";
 import { Input } from "../../ui/shadcn/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DateFieldPropertiesSchema, propertiesSchema } from "@/schemas";
+import { SelectFieldPropertiesSchema } from "@/schemas";
 import { useEffect, useState } from "react";
 import useCanvas from "@/hooks/use-canvas";
 import { useForm } from "react-hook-form";
@@ -19,26 +19,29 @@ import {
 } from "../../ui/shadcn/form";
 import { Switch } from "../../ui/shadcn/switch";
 import { cn } from "@/lib/utils";
-import { BsFillCalendarDateFill } from "react-icons/bs";
-import { Button } from "../../ui/shadcn/button";
-import { CalendarIcon } from "lucide-react";
+import { RiDropdownList } from "react-icons/ri";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../ui/shadcn/popover";
-import { format } from "date-fns";
-import { Calendar } from "../../ui/shadcn/calendar";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../ui/shadcn/select";
+import { Separator } from "../../ui/shadcn/separator";
+import { Button } from "../../ui/shadcn/button";
+import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
 
-const type = "DateField";
+const type = "SelectField";
 
 const extraAttributes = {
-  label: "Date Field",
-  helperText: "Pick a date",
+  label: "Select Field",
+  helperText: "Helper Text",
   required: false,
+  placeHolder: "Value here",
+  options: [],
 };
 
-export const DateFieldFormElement = {
+export const SelectFieldFormElement = {
   type,
   construct: (id) => ({
     id,
@@ -47,8 +50,8 @@ export const DateFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: BsFillCalendarDateFill,
-    label: "Date Filed",
+    icon: RiDropdownList,
+    label: "Select Filed",
   },
 
   CanvasComponent: CanvasComponent,
@@ -74,13 +77,11 @@ function CanvasComponent({ elementInstance }) {
         {label}
         {required && "*"}
       </Label>
-      <Button
-        variant="outline"
-        className="w-full justify-start text-right font-normal"
-      >
-        <CalendarIcon className="w-4 h-4 mr-2" />
-        <span>تاریخ را انتخاب کنید</span>
-      </Button>
+      <Select>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder={placeHolder} />
+        </SelectTrigger>
+      </Select>
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
       )}
@@ -94,9 +95,7 @@ function FormComponent({
   isInvalid,
   defaultValue,
 }) {
-  const [date, setDate] = useState(
-    defaultValue ? new Date(defaultValue) : undefined
-  );
+  const [value, setValue] = useState(defaultValue || "");
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -104,44 +103,35 @@ function FormComponent({
   }, [isInvalid]);
 
   const element = elementInstance;
-  const { label, required, placeHolder, helperText } = element.extraAttributes;
+  const { label, required, placeHolder, helperText, options } =
+    element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label className={cn(error && "text-red-500")}>
         {label}
         {required && "*"}
       </Label>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cn(
-              "w-full justify-start text-right font-normal",
-              !date && "text-muted-foreground",
-              error && "border-red-500"
-            )}
-          >
-            <CalendarIcon className="w-4 h-4 mr-2" />
-            {date ? format(date, "PPP") : <span>تاریخ را انتخاب کنید</span>}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={(date) => {
-              setDate(date);
+      <Select
+        onValueChange={(value) => {
+          setValue(value);
 
-              if (!submitValue) return;
-              const value = date?.toUTString() || "";
-              const valid = DateFieldFormElement.validate(element, value);
-              setError(!valid);
-              submitValue(element.id, value);
-              initialFocus;
-            }}
-          />
-        </PopoverContent>
-      </Popover>
+          if (!submitValue) return;
+          const valid = SelectFieldFormElement.valudate(element, value);
+          setError(!valid);
+          submitValue(element.id, value);
+        }}
+      >
+        <SelectTrigger className={(cn("w-full"), error && "border-red-500")}>
+          <SelectValue placeholder={placeHolder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       {helperText && (
         <p
           className={cn(
@@ -158,15 +148,17 @@ function FormComponent({
 
 function PropertiesComponent({ elementInstance }) {
   const element = elementInstance;
-  const { updateElement } = useCanvas();
+  const { updateElement, setSelectedElement } = useCanvas();
 
   const form = useForm({
-    resolver: zodResolver(DateFieldPropertiesSchema),
-    mode: "onBlur",
+    resolver: zodResolver(SelectFieldPropertiesSchema),
+    mode: "onSubmit",
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
+      placeHolder: element.extraAttributes.placeHolder,
+      options: element.extraAttributes.option,
     },
   });
 
@@ -180,20 +172,16 @@ function PropertiesComponent({ elementInstance }) {
       extraAttributes: {
         label: values.label,
         helperText: values.helperText,
+        placeHolder: values.placeHolder,
         required: values.required,
+        options: values.options,
       },
     });
   }
 
   return (
     <Form {...form}>
-      <form
-        onBlur={form.handleSubmit(applyChanges)}
-        className="space-y-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
+      <form onSubmit={form.handleSubmit(applyChanges)} className="space-y-3">
         {/* Form Title */}
         <FormField
           control={form.control}
@@ -212,6 +200,31 @@ function PropertiesComponent({ elementInstance }) {
                 />
               </FormControl>
               <FormDescription>عنوان فرم</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Form Place Holder */}
+        <FormField
+          control={form.control}
+          name="placeHolder"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>متن پس زمینه</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.currentTarget.blur();
+                    }
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                این متن به صورت کم رنگ نشان داده خواهد شد
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -243,6 +256,67 @@ function PropertiesComponent({ elementInstance }) {
           )}
         />
 
+        <Separator />
+        {/* Options field */}
+        <FormField
+          control={form.control}
+          name="options"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex justify-between items-center">
+                <FormLabel>گزینه ها</FormLabel>
+                <Button
+                  variant="outline"
+                  className="gap-2"
+                  onClick={(e) => {
+                    e.preventDefault(); // avoid submit
+                    form.setValue("options", field.value.concat("New Option"));
+                  }}
+                >
+                  <AiOutlinePlus />
+                  افزودن
+                </Button>
+              </div>
+              <div className="flex flex-col gap-2">
+                {form.watch("options")?.map((option, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between gap-1"
+                  >
+                    <Input
+                      placeholder=""
+                      value={option}
+                      onChange={(e) => {
+                        field.value[index] = e.target.value;
+                        field.onChange(field.value);
+                      }}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const newOptions = [...field.value];
+                        newOptions.splice(index, 1);
+                        field.onChange(newOptions);
+                      }}
+                    >
+                      <AiOutlineClose />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+
+              <FormDescription>
+                متن راهنما یا توضیجاتی که می خواهید در مورد فیلد به کاربران
+                نمایش داده شود
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Separator />
         {/* Form required */}
         <FormField
           control={form.control}
@@ -269,6 +343,10 @@ function PropertiesComponent({ elementInstance }) {
             </FormItem>
           )}
         />
+        <Separator />
+        <Button className="w-full" type="submit">
+          ذخیره
+        </Button>
       </form>
     </Form>
   );
