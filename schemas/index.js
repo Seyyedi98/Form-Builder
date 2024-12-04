@@ -118,3 +118,9 @@ export const SelectFieldPropertiesSchema = z.object({
   required: z.boolean().default(false),
   options: z.array(z.string()).default([]),
 });
+
+export const checkboxFieldPropertiesSchema = z.object({
+  label: z.string().min(2).max(50),
+  helperText: z.string().max(200),
+  required: z.boolean().default(false),
+});

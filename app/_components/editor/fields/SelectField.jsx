@@ -30,6 +30,7 @@ import {
 import { Separator } from "../../ui/shadcn/separator";
 import { Button } from "../../ui/shadcn/button";
 import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
+import { toast } from "@/hooks/use-toast";
 
 const type = "SelectField";
 
@@ -112,9 +113,9 @@ function FormComponent({
         {required && "*"}
       </Label>
       <Select
+        defaultValue={value}
         onValueChange={(value) => {
           setValue(value);
-
           if (!submitValue) return;
           const valid = SelectFieldFormElement.valudate(element, value);
           setError(!valid);
@@ -177,6 +178,12 @@ function PropertiesComponent({ elementInstance }) {
         options: values.options,
       },
     });
+
+    toast({
+      description: "تغییرات با موفقیت ذخیره شد",
+    });
+
+    setSelectedElement(null);
   }
 
   return (
@@ -307,10 +314,6 @@ function PropertiesComponent({ elementInstance }) {
                 ))}
               </div>
 
-              <FormDescription>
-                متن راهنما یا توضیجاتی که می خواهید در مورد فیلد به کاربران
-                نمایش داده شود
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

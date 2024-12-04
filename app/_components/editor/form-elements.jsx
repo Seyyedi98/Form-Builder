@@ -1,3 +1,4 @@
+import { checkboxFieldFormElement } from "./fields/checkbox-field";
 import { DateFieldFormElement } from "./fields/DateField";
 import { NumberFieldFormElement } from "./fields/number-filed";
 import { ParagraphFieldFormElement } from "./fields/paragraph-filed";
@@ -20,4 +21,5 @@ export const FormElements = {
   TextAreaField: TextAreaFieldFormElement,
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
+  checkboxField: checkboxFieldFormElement,
 };

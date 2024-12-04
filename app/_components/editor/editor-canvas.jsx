@@ -22,7 +22,7 @@ import Link from "next/link";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const FormBuilder = ({ form }) => {
-  const { setElements } = useCanvas();
+  const { setElements, setSelectedElement } = useCanvas();
   const [isReady, setIsReady] = useState(false);
   const shareUrl = `${window.location.origin}/submit/${form.shareUrl}`;
 
@@ -44,9 +44,10 @@ const FormBuilder = ({ form }) => {
 
   useEffect(() => {
     const elements = JSON.parse(form.content);
+    setSelectedElement(null);
     setElements(elements);
     setIsReady(true);
-  }, [form, setElements]);
+  }, [form, setElements, setSelectedElement]);
 
   if (!isReady) {
     return (
