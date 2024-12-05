@@ -1,6 +1,6 @@
 import { checkboxFieldFormElement } from "./fields/checkbox-field";
 import { DateFieldFormElement } from "./fields/DateField";
-import { NumberFieldFormElement } from "./fields/number-filed";
+import { NumberFieldFormElement } from "./fields/number-field";
 import { ParagraphFieldFormElement } from "./fields/paragraph-filed";
 import { SelectFieldFormElement } from "./fields/SelectField";
 import { SeparatorFieldFormElement } from "./fields/separator";

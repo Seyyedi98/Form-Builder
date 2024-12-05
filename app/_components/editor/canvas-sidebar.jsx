@@ -10,8 +10,8 @@ const CanvasSidebar = () => {
 
   return (
     <aside
-      className="w-[400px] max-w-[400px] flex flex-col flex-grow gap-2
-    border-l-2 border-muted p-4 bg-background overflow-y-auto h-full"
+      className="w-[340px] max-w-[400px] flex flex-col flex-grow gap-2
+    border-l-2 border-muted p-4 bg-background overflow-y-auto max-h-fit"
     >
       {selectedElement ? (
         <FormPropertiesSidebar />

@@ -20,8 +20,9 @@ import {
 import { Switch } from "../../ui/shadcn/switch";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "../../ui/shadcn/checkbox";
+import { CheckCheckIcon } from "lucide-react";
 
-const type = "checkboxField";
+const type = "CheckboxField";
 
 const extraAttributes = {
   label: "Checkbox Field",
@@ -38,7 +39,7 @@ export const checkboxFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: IoMdCheckbox,
+    icon: CheckCheckIcon,
     label: "Checkbox Filed",
   },
 

@@ -1,13 +1,15 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
-import { Label } from "../../ui/shadcn/label";
-import { Input } from "../../ui/shadcn/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DateFieldPropertiesSchema, propertiesSchema } from "@/schemas";
-import { useEffect, useState } from "react";
 import useCanvas from "@/hooks/use-canvas";
+import { cn } from "@/lib/utils";
+import { DateFieldPropertiesSchema } from "@/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { Calendar1Icon, CalendarIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Button } from "../../ui/shadcn/button";
+import { Calendar } from "../../ui/shadcn/calendar";
 import {
   Form,
   FormControl,
@@ -17,18 +19,14 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/shadcn/form";
-import { Switch } from "../../ui/shadcn/switch";
-import { cn } from "@/lib/utils";
-import { BsFillCalendarDateFill } from "react-icons/bs";
-import { Button } from "../../ui/shadcn/button";
-import { CalendarIcon } from "lucide-react";
+import { Input } from "../../ui/shadcn/input";
+import { Label } from "../../ui/shadcn/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../ui/shadcn/popover";
-import { format } from "date-fns";
-import { Calendar } from "../../ui/shadcn/calendar";
+import { Switch } from "../../ui/shadcn/switch";
 
 const type = "DateField";
 
@@ -47,7 +45,7 @@ export const DateFieldFormElement = {
   }),
 
   CanvasBtnElement: {
-    icon: BsFillCalendarDateFill,
+    icon: Calendar1Icon,
     label: "Date Filed",
   },
 

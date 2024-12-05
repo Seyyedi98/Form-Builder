@@ -1,10 +1,10 @@
-import React, { useTransition } from "react";
-import { HiSaveAs } from "react-icons/hi";
-import { Button } from "../ui/shadcn/button";
+import { UpdateFormContent } from "@/actions/form/form";
 import useCanvas from "@/hooks/use-canvas";
 import { toast } from "@/hooks/use-toast";
+import { Save } from "lucide-react";
+import { useTransition } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { UpdateFormContent } from "@/actions/form/form";
+import { Button } from "../ui/shadcn/button";
 
 const SaveFormBtn = ({ id }) => {
   const { elements } = useCanvas();
@@ -15,13 +15,13 @@ const SaveFormBtn = ({ id }) => {
       const JSONElement = JSON.stringify(elements);
       await UpdateFormContent(id, JSONElement);
       toast({
-        title: "ذخیره موفقیت آمیز",
+        title: "عملیات موفقیت آمیز",
         description: "فرم با موفقت ذخیره شد",
       });
     } catch (error) {
       toast({
-        title: "ذخیره ناموفق",
-        description: "خطایی رخ داد",
+        title: "عملیات ناموفق",
+        description: "هنگام ذخیره سازی خطایی رخ داد",
         variant: "destructive",
       });
     }
@@ -36,7 +36,7 @@ const SaveFormBtn = ({ id }) => {
         startTransition(updateFormContent);
       }}
     >
-      <HiSaveAs className="w-4 h-4" />
+      <Save className="w-4 h-4" />
       ذخیره
       {loading && <FaSpinner className="animate-spin" />}
     </Button>

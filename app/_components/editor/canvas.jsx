@@ -110,7 +110,7 @@ const Canvas = () => {
     <div className="flex w-full h-full">
       <CanvasSidebar />
       <div
-        className="p-4 w-full"
+        className="p-1 w-full"
         onClick={() => {
           if (selectedElement) setSelectedElement(null);
         }}
@@ -118,7 +118,7 @@ const Canvas = () => {
         <div
           ref={droppable.setNodeRef}
           className={cn(
-            "bg-background msx-w-[920px] transition-all duration-300 h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
+            "bg-background msx-w-[920px] transition-all duration-300 h-full m-auto flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
             droppable.isOver && "ring-4 ring-primary/70"
           )}
         >

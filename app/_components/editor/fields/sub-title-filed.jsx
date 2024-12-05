@@ -17,7 +17,7 @@ import {
 import { Input } from "../../ui/shadcn/input";
 import { Label } from "../../ui/shadcn/label";
 
-const type = "TitleField";
+const type = "SubtitleField";
 
 const extraAttributes = {
   title: "Subtitle Field",

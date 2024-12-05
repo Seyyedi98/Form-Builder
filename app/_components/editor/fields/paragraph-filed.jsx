@@ -1,14 +1,11 @@
 "use client";
 
 import useCanvas from "@/hooks/use-canvas";
-import {
-  ParagraphFieldPropertiesSchema,
-  TitleFieldPropertiesSchema,
-} from "@/schemas";
+import { ParagraphFieldPropertiesSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LuHeading1 } from "react-icons/lu";
+import { BsTextParagraph } from "react-icons/bs";
 import {
   Form,
   FormControl,
@@ -17,9 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/shadcn/form";
-import { Input } from "../../ui/shadcn/input";
 import { Label } from "../../ui/shadcn/label";
-import { BsTextParagraph } from "react-icons/bs";
 import { Textarea } from "../../ui/shadcn/textarea";
 
 const type = "ParagraphField";

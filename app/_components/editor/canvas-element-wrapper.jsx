@@ -50,8 +50,8 @@ const CanvasElementWrapper = ({ element }) => {
       ref={draggable.setNodeRef}
       {...draggable.listeners}
       {...draggable.attributes}
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer
-     rounded-md ring-1 ring-accent ring-inset"
+      className="relative h-[120px] flex bg-secondaryBg flex-col text-foreground hover:cursor-pointer
+     rounded-2xl ring-1 ring-accent ring-inset"
       onMouseEnter={() => {
         setMouseIsOver(true);
       }}

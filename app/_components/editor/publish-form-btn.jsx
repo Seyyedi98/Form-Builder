@@ -1,6 +1,9 @@
-import React, { useTransition } from "react";
-import { Button } from "../ui/shadcn/button";
-import { MdOutlinePublish } from "react-icons/md";
+import { PublishForm } from "@/actions/form/form";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { FaIcons } from "react-icons/fa";
+import { MdPublish } from "react-icons/md";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,10 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/shadcn/alert-dialog";
-import { FaIcons } from "react-icons/fa";
-import { toast } from "@/hooks/use-toast";
-import { PublishForm } from "@/actions/form/form";
-import { useRouter } from "next/navigation";
+import { Button } from "../ui/shadcn/button";
 
 const PublishFormBtn = ({ id }) => {
   const [loading, startTransition] = useTransition();
@@ -44,7 +44,7 @@ const PublishFormBtn = ({ id }) => {
           variant="outline"
           className="gap-2 text-white bg-gradient-to-r from-indigo-400 to-cyan-400"
         >
-          <MdOutlinePublish className="w-6 h-6" />
+          <MdPublish className="w-6 h-6" />
           انتشار
         </Button>
       </AlertDialogTrigger>

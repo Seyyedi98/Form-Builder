@@ -1,9 +1,6 @@
-import { Button } from "@/app/_components/ui/shadcn/button";
-import Link from "next/link";
-import React from "react";
 import UserButton from "../auth/user-button";
-import ThemeSwitcher from "../ui/global/ThemeSwitcher";
 import Logo from "../ui/global/Logo";
+import ThemeSwitcher from "../ui/global/ThemeSwitcher";
 
 const Navbar = () => {
   return (
