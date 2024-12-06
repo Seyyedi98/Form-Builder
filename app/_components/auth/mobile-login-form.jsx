@@ -58,8 +58,8 @@ export const MobileLoginForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Welcome back"
-      backButtonLabel="Dont have an account?"
+      headerLabel="خوش آمدید"
+      backButtonLabel="حساب کاربری ندارید؟"
       backButtonHref="/auth/register"
     >
       <Form {...form}>
@@ -72,7 +72,7 @@ export const MobileLoginForm = () => {
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>شماره موبایل</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -93,7 +93,7 @@ export const MobileLoginForm = () => {
                 name="code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>OTP Code</FormLabel>
+                    <FormLabel>کد ارسال شده</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -110,7 +110,7 @@ export const MobileLoginForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPanding} type="submit" className="w-full">
-            {showOtpInput ? "Confirm" : "Login"}
+            {showOtpInput ? "ارسال" : "ورود"}
           </Button>
         </form>
       </Form>

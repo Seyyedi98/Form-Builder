@@ -1,9 +1,7 @@
-import React from "react";
-import { FormElements } from "./form-elements";
-import SidebarBtnElement from "./sidebar-button-element";
 import useCanvas from "@/hooks/use-canvas";
-import FormPropertiesSidebar from "./form-properties-sidebar";
+import { FormElements } from "./form-elements";
 import FormElementsSidebar from "./form-elements-sidebar";
+import FormPropertiesSidebar from "./form-properties-sidebar";
 
 const CanvasSidebar = () => {
   const { selectedElement } = useCanvas();
