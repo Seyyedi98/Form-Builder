@@ -52,7 +52,7 @@ const SubmissionsTable = async ({ id }) => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold my-4">نتایح</h1>
+      <h1 className="text-2xl font-bold my-4">نتایج</h1>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -20,7 +20,7 @@ import { Label } from "../../ui/shadcn/label";
 const type = "TitleField";
 
 const extraAttributes = {
-  title: "Title Field",
+  title: "عنوان",
 };
 
 export const TitleFieldFormElement = {
@@ -33,7 +33,7 @@ export const TitleFieldFormElement = {
 
   CanvasBtnElement: {
     icon: LuHeading1,
-    label: "Title Filed",
+    label: "عنوان",
   },
 
   CanvasComponent: CanvasComponent,

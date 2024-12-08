@@ -102,7 +102,7 @@ function FormComponent({
         className={cn(error && "border-red-500")}
         onCheckedChange={(checked) => {
           let value = false;
-          if (checked === true) value = true;
+          if (checked === true) value = "true";
           setValue(value);
 
           if (!submitValue) return;

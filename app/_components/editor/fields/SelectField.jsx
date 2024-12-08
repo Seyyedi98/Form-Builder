@@ -117,7 +117,7 @@ function FormComponent({
         onValueChange={(value) => {
           setValue(value);
           if (!submitValue) return;
-          const valid = SelectFieldFormElement.valudate(element, value);
+          const valid = SelectFieldFormElement.validate(element, value);
           setError(!valid);
           submitValue(element.id, value);
         }}
