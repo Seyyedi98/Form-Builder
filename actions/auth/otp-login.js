@@ -9,6 +9,7 @@ import { sendTwoFactorTokenEmail } from "@/lib/mail";
 import { generateOtpToken } from "@/lib/tokens";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { OtpLoginSchema } from "@/schemas";
+import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 
 // Login returns 'error', 'success', 'twoFactor'
@@ -16,6 +17,8 @@ import { AuthError } from "next-auth";
 export const otpLogin = async (values) => {
   // server side values validation
   const validatedFields = OtpLoginSchema.safeParse(values);
+
+  const hashedPassword = await bcrypt.hash("password", 10);
 
   if (!validatedFields.success) {
     return { error: "Invalid fields" };
@@ -25,12 +28,26 @@ export const otpLogin = async (values) => {
   const { phoneNumber, password, code } = validatedFields.data;
   const existingUser = await getUserByPhoneNumber(phoneNumber);
 
-  if (!existingUser || !existingUser.phoneNumber || !existingUser.password) {
-    return { error: "Phone Number does not exist" };
+  if (!existingUser) {
+    // create new account
+    const newUser = await prisma.user.create({
+      data: {
+        phoneNumber,
+        password: hashedPassword,
+        isTwoFactorEnabled: true,
+        emailVerified: new Date(),
+      },
+    });
+
+    // Send OTP
+    const otpToken = await generateOtpToken(newUser.phoneNumber);
+    // await sendTwoFactorTokenEmail(otpToken.phoneNumber, otpToken.token);
+    await sendTwoFactorTokenEmail("seyyedi98@outlook.com", otpToken.token);
+    return { showOtpInput: true, success: "OTP code has been sent" }; // Change login page
   }
 
   // Check 2FA
-  if (existingUser.isTwoFactorEnabled && existingUser.phoneNumber) {
+  if (existingUser) {
     if (code) {
       const otpToken = await getOtpTokenByPhoneNumber(existingUser.phoneNumber);
       if (!otpToken) return { error: "Invalid code" };
@@ -65,7 +82,8 @@ export const otpLogin = async (values) => {
       });
     } else {
       const otpToken = await generateOtpToken(existingUser.phoneNumber);
-      await sendTwoFactorTokenEmail(otpToken.phoneNumber, otpToken.token);
+      // await sendTwoFactorTokenEmail(otpToken.phoneNumber, otpToken.token);
+      await sendTwoFactorTokenEmail("seyyedi98@outlook.com", otpToken.token);
       return { showOtpInput: true, success: "OTP code has been sent" }; // Change login page
     }
   }

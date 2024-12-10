@@ -7,7 +7,7 @@ import { SeparatorFieldFormElement } from "./fields/separator";
 import { SpacerFieldFormElement } from "./fields/spacer-filed";
 import { SubtitleFieldFormElement } from "./fields/sub-title-filed";
 import { TextAreaFieldFormElement } from "./fields/text-area-field";
-import { TextFieldFormElement } from "./fields/text-filed";
+import { TextFieldFormElement } from "./fields/text-field";
 import { TitleFieldFormElement } from "./fields/title-field";
 
 export const FormElements = {
