@@ -106,7 +106,7 @@ function FormComponent({
           setValue(value);
 
           if (!submitValue) return;
-          const stringValue = value ? true : false;
+          const stringValue = value ? "true" : "false";
           const valid = checkboxFieldFormElement.validate(element, stringValue);
           setError(!valid);
           submitValue(element.id, stringValue);

@@ -1,4 +1,10 @@
-import React from "react";
+import { formatDistance } from "date-fns";
+import { Eye, Pencil } from "lucide-react";
+import Link from "next/link";
+import { BiRightArrow } from "react-icons/bi";
+import { FaEdit } from "react-icons/fa";
+import { Badge } from "../shadcn/badge";
+import { Button } from "../shadcn/button";
 import {
   Card,
   CardContent,
@@ -7,13 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../shadcn/card";
-import { Badge } from "../shadcn/badge";
-import { formatDistance } from "date-fns";
-import { LuView } from "react-icons/lu";
-import { FaWpforms, FaEdit } from "react-icons/fa";
-import { BiRightArrow } from "react-icons/bi";
-import { Button } from "../shadcn/button";
-import Link from "next/link";
 
 const FormCard = ({ form }) => {
   return (
@@ -33,9 +32,9 @@ const FormCard = ({ form }) => {
           })}
           {form.published && (
             <span className="flex items-center gap-2">
-              <LuView className="text-muted-foreground" />
+              <Eye className="text-muted-foreground" />
               <span>{form.visits.toLocaleString()}</span>
-              <FaWpforms className="text-muted-foreground" />
+              <Pencil className="text-muted-foreground" />
               <span>{form.submissions.toLocaleString()}</span>
             </span>
           )}

@@ -1,12 +1,9 @@
 import { GetFormById } from "@/actions/form/form";
 import FormLinkShare from "@/app/_components/button/form-link-share";
 import VisitButton from "@/app/_components/button/visit-button";
-import { LuView } from "react-icons/lu";
-import { FaWpforms } from "react-icons/fa";
-import { HiCursorClick } from "react-icons/hi";
-import { TbArrowBounce } from "react-icons/tb";
-import { StatsCard } from "@/app/_components/ui/cards/form-stats-card";
 import SubmissionsTable from "@/app/_components/table/submissions-table";
+import { StatsCard } from "@/app/_components/ui/cards/form-stats-card";
+import { Eye, Pencil } from "lucide-react";
 
 const FormDetailPage = async ({ params }) => {
   const { id } = await params;
@@ -39,38 +36,20 @@ const FormDetailPage = async ({ params }) => {
       <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 container">
         <StatsCard
           title="مشاهده"
-          icon={<LuView className="text-blue-600" />}
+          icon={<Eye className="text-blue-600" />}
           helperText="دفعات مشاهده شده"
           value={visits.toLocaleString()}
           loading={false}
-          className="shadow-md shadow-blue-600"
+          className="shadow-md"
         />
 
         <StatsCard
           title="ثبت"
-          icon={<FaWpforms className="text-yellow-600" />}
+          icon={<Pencil className="text-yellow-600" />}
           helperText="دفعات ثبت شده"
           value={submissions.toLocaleString()}
           loading={false}
-          className="shadow-md shadow-yellow-600"
-        />
-
-        <StatsCard
-          title="درصد ثبت"
-          icon={<HiCursorClick className="text-green-600" />}
-          helperText="مشاهده کنندگانی که فرم را پر کرده اند"
-          value={submissions.toLocaleString() + "%"}
-          loading={false}
-          className="shadow-md shadow-green-600"
-        />
-
-        <StatsCard
-          title="درصد خروج"
-          icon={<TbArrowBounce className="text-red-600" />}
-          helperText="مشاهده کنندگانی که فرم را پر نکرده اند"
-          value={submissions.toLocaleString() + "%"}
-          loading={false}
-          className="shadow-md shadow-red-600"
+          className="shadow-md"
         />
       </div>
       <div className="container pt-10">
