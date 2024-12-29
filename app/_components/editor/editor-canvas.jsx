@@ -26,6 +26,8 @@ const FormBuilder = ({ form }) => {
   const [isReady, setIsReady] = useState(false);
   const shareUrl = `${window.location.origin}/submit/${form.shareUrl}`;
 
+  // console.log(setElements);
+
   const mouseSensor = useSensor(MouseSensor, {
     // Require the mouse to move by 10 pixels before activating
     activationConstraint: {
@@ -42,6 +44,7 @@ const FormBuilder = ({ form }) => {
   });
   const sensors = useSensors(mouseSensor, touchSensor);
 
+  // Get form elements, then empty elements list (if there is a data from other forms) and set current form elements
   useEffect(() => {
     const elements = JSON.parse(form.content);
     setSelectedElement(null);

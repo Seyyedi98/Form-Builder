@@ -1,5 +1,6 @@
 "use server";
 
+import prisma from "@/lib/client";
 import { currentUser } from "@/lib/get-user";
 
 export async function GetFormStats() {

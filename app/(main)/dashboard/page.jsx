@@ -1,4 +1,3 @@
-import { GetFormStats } from "@/actions/form/form-stats";
 import {
   FormCards,
   FormCardSkeleton,
@@ -6,7 +5,6 @@ import {
 import FormStatsCard from "@/app/_components/ui/cards/form-stats-card";
 import CreateFormButton from "@/app/_components/ui/form/create-form-button";
 import { Separator } from "@/app/_components/ui/shadcn/separator";
-import { auth } from "@/auth";
 import { Suspense } from "react";
 
 const page = async () => {
