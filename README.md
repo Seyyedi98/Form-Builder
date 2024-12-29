@@ -59,9 +59,16 @@ AUTH_TRUST_HOST='http://localhost:3000'
 ```bash
 git clone https://github.com/yourusername/formbuilder.git  
 cd formbuilder
+
+### Install Dependencies
 npm install
+
+### Run Database Migrations
 npx prisma migrate dev
-npm run dev  
+
+### Start the Development Server
+npm run dev
+```
 
 
 ## 🔧 Future Features  
