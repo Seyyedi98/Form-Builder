@@ -52,3 +52,36 @@ AUTH_SECRET='<your-auth-secret>'
 RESEND_API_KEY='<your-api-key>'
 NEXTAUTH_URL='http://localhost:3000'
 AUTH_TRUST_HOST='http://localhost:3000'
+
+## 🛠️ Installation & Setup  
+
+### Clone the Repository  
+```bash
+git clone https://github.com/yourusername/formbuilder.git  
+cd formbuilder
+npm install
+npx prisma migrate dev
+npm run dev  
+
+
+## 🔧 Future Features  
+
+- **Form Templates**: Pre-designed templates for quick form creation.  
+- **Advanced Analytics**: Gain deeper insights into form submissions.  
+- **Integration Options**: Add support for webhooks and third-party integrations like Google Sheets and Zapier.  
+
+---
+
+## 📜 License  
+
+This project is licensed under the **MIT License**. Feel free to fork, modify, and contribute!  
+
+---
+
+Start building your forms today and experience the simplicity and power of **FormBuilder**!  
+
+
+
+
+
+
