@@ -88,6 +88,34 @@ This project is licensed under the **MIT License**. Feel free to fork, modify, a
 Start building your forms today and experience the simplicity and power of **FormBuilder**!  
 
 
+## Features Showcase
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/img1.png" alt="Feature 1" width="200"/>
+      <p>Feature 1</p>
+    </td>
+    <td align="center">
+      <img src="images/img2.png" alt="Feature 2" width="200"/>
+      <p>Feature 2</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="images/img3.png" alt="Feature 3" width="200"/>
+      <p>Feature 3</p>
+    </td>
+    <td align="center">
+      <img src="images/img4.png" alt="Feature 4" width="200"/>
+      <p>Feature 4</p>
+    </td>
+    <td align="center">
+      <img src="images/img5.png" alt="Feature 4" width="200"/>
+      <p>Feature 4</p>
+    </td>
+  </tr>
+</table>
 
 
 
