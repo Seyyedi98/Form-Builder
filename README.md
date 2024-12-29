@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FormBuilder - Drag-and-Drop Form Creator  
 
-## Getting Started
+**FormBuilder** is a feature-rich **Next.js 15** web application that allows users to easily design, publish, and manage forms using an intuitive drag-and-drop editor. Whether you're building simple contact forms or complex data collection workflows, FormBuilder makes the process seamless and efficient.  
 
-First, run the development server:
+This project leverages modern tools and frameworks, including **Prisma**, **React DnD Kit**, **ShadCN**, **Tailwind CSS**, and **NextAuth**, ensuring scalability, flexibility, and an elegant user experience.  
 
+---
+
+## 🚀 Features  
+
+### 🔑 User Authentication  
+- **Register**: Sign up using either an email address or a mobile phone number.  
+- **Secure Authentication**: Powered by **NextAuth** for robust and secure user login management.  
+
+### 🏠 Dashboard  
+- **Centralized Management**: A user-friendly dashboard to manage all your forms and submissions.  
+- **Add New Forms**: Quickly create a new form and jump directly into the editor.  
+
+### ✏️ Drag-and-Drop Editor  
+- **Easy to Use**: Add fields such as text inputs, dropdowns, checkboxes, and more with a simple drag-and-drop interface.  
+- **Customizable Forms**: Rearrange, edit, and style your form elements effortlessly.  
+- **Rich UI**: Built using **React DnD Kit** and **ShadCN** components for a polished and modern experience.  
+
+### 🌐 Publishing & Sharing  
+- **Save and Publish**: Save your form designs and make them instantly accessible.  
+- **Shareable Links**: Get a unique URL for each form to share with others for filling out.  
+
+### 📊 Submission Tracking  
+- **View Submissions**: See all submitted form data directly from your dashboard.  
+- **Data Insights**: Manage and analyze submission data for better decision-making.  
+
+---
+
+## 🛠️ Tech Stack  
+
+- **Next.js 15**: A React framework for building fast and scalable web applications.  
+- **Prisma**: A modern ORM for interacting with the database.  
+- **React DnD Kit**: Provides drag-and-drop functionality for form editing.  
+- **ShadCN**: A customizable UI component library.  
+- **Tailwind CSS**: For beautiful and responsive styling.  
+- **NextAuth**: Handles user authentication seamlessly.  
+
+---
+
+## 🛑 Prerequisites  
+
+Before running the application, make sure to configure the following environment variables in your `.env` file:  
+
+```env
+DATABASE_URL='mysql://<your-username>:<your-password>@localhost:3306/<your-database>'
+AUTH_SECRET='<your-auth-secret>'
+RESEND_API_KEY='<your-api-key>'
+NEXTAUTH_URL='http://localhost:3000'
+AUTH_TRUST_HOST='http://localhost:3000'
+
+## 🛠️ Installation & Setup  
+
+### Clone the Repository  
 ```bash
+git clone https://github.com/yourusername/formbuilder.git  
+cd formbuilder
+
+### Install Dependencies
+npm install
+
+### Run Database Migrations
+npx prisma migrate dev
+
+### Start the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔧 Future Features  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Form Templates**: Pre-designed templates for quick form creation.  
+- **Advanced Analytics**: Gain deeper insights into form submissions.  
+- **Integration Options**: Add support for webhooks and third-party integrations like Google Sheets and Zapier.  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 License  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the **MIT License**. Feel free to fork, modify, and contribute!  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+Start building your forms today and experience the simplicity and power of **FormBuilder**!  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
